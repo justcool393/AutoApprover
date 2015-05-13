@@ -114,11 +114,11 @@ if __name__ == "__main__":
     low_frequency_mod = [BlockedSubredditRemover(r), InvitationAcceptor(r)]
 
     while True:
-        cycle = 0
+        cycle = 5
         try:
             for m in modules:
                 m.run()
-            if cycle > 9:
+            if cycle > 4:
                 for lm in low_frequency_mod:
                     lm.run()
                 cycle = 0
