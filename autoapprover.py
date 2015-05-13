@@ -81,6 +81,7 @@ class InvitationAcceptor:
         for sub in self.invites:
             try:
                 self.r.accept_moderator_invite(sub)
+                print("Accepted mod invite to " + sub)
             except praw.errors.InvalidInvite:
                 pass
         self.invites = set()
@@ -126,6 +127,7 @@ if __name__ == "__main__":
                 for lm in low_frequency_mod:
                     lm.run()
                 cycle = 0
-        except RECOVERABLE_EXC:
+        except RECOVERABLE_EXC as e:
+            print("Error: " + str(e))
             pass
         time.sleep(10)
