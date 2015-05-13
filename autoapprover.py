@@ -35,6 +35,7 @@ def is_blocked(s):
     cur.execute("SELECT * FROM subreddits WHERE name=%s AND mode=-1", (s,))
     return True if cur.fetchone() else False
 
+
 def is_all_approved(s):
     s = s.display_name
     cur.execute("SELECT * FROM subreddits WHERE name=%s AND mode=1", (s,))
@@ -47,7 +48,10 @@ class BlockedSubredditRemover:
         self.query = "SELECT name FROM subreddits WHERE mode=-1"
 
     def run(self):
-        for row in cur.execute(self.query):
+        rows = cur.execute(self.query)
+        if not rows:
+            return
+        for row in rows:
             s = r.get_subreddit(row[0])
             if not s:
                 continue
