@@ -89,7 +89,7 @@ class AllApprover:
     def run(self):
         queue = self.r.get_spam()
         for s in queue:
-            if is_all_approved(s) and s.banned_by is None:
+            if is_all_approved(s.subreddit) and s.banned_by is None:
                 s.approve()
 
 
